@@ -3948,6 +3948,8 @@ MonoBehaviour:
   SecondaryWeapon: {fileID: 1316806812186396551}
   Knife: {fileID: 4882693867411279565}
   Grenade: {fileID: 0}
+  Speed: 0
+  FixState: 0
 --- !u!1 &3529868240003387654
 GameObject:
   m_ObjectHideFlags: 0

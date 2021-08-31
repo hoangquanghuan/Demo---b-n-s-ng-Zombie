@@ -5,9 +5,14 @@ using UnityEngine;
 
 namespace Demo
 {
-    public interface ChangeWeapon 
+    public interface ChangeWeaponInPlayer
     {
         public void ChangeWeaponInPlayer();
+    }
+
+    public interface ChangeStateMoveInPlayer
+    {
+        public void ChangeStateMoveInPlayer();
     }
 }
 

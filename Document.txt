@@ -64,7 +64,7 @@ Phân tích chi tiết
 			
 			->Phân tích:
 				+ Animation của người phụ thuộc vào người đang cầm vũ khí gì trong tay
-				   bước 1: biết player đang cầm vũ khí gì
+					bước 1: biết player đang cầm vũ khí gì
 						1.1: xác định trên người player đang có những trang bị gì
 							+ 1 vũ khí chính: w_m4_tac
 							+ 1 vũ khí phụ: w_usp
@@ -73,7 +73,20 @@ Phân tích chi tiết
 							-> xử dụng 1 biến enum: TypeEquipment -> để phân biệt người đang dùng vũ khí gì -> mình test thay đổi vũ khí có trên người Player
 						    1.1.1: nếu player đang cầm vũ khí chính -> xác định được loại vũ khí chính  (vì vũ khí chính có 2 loại: băng đạn ở trước và băng đạn ở sau)
 						1.2
-				   bước 2: biết player đang ở trang thái gì trong 3 trang thái:
+					bước 2: biết player đang ở trang thái gì trong 3 trang thái:
 						+ đứng
 						+ ngồi
 						+ nằm
+					bước 3: di chuyển
+						note: lấy state di chuyển bình thường làm gốc: 
+						+ nhấn các phím a w d s để di chuyển bình thường
+						+ kết hợp với shift để di chuyển nhanh hơn
+						+ space nhảy với 3 trạng thái:
+							. state 1: bật nhảy từ mặt đất lên đến một độ cao nhất định
+							. state 2: rơi
+							. state 3: chạm đất
+							
+							=> phân tích:
+								nhấn shift trước và sau khi nhấn a w d s đều thay đổi trạng thái từ giữa Walk và Run
+								nhấn a+w, w+d, a+s, s+d: player xoay người theo hướng và sử dụng animation di chuyển tiến vs w hoặc lùi vs s
+								nhấn a+w, w+d, a+s, s+d kết hợp vs shift thì thành di chuyển run

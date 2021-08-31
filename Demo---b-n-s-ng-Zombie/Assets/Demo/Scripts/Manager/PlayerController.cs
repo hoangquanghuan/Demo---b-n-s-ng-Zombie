@@ -10,13 +10,12 @@ namespace Demo
         public Player Player;
 
         // Update is called once per frame
-        void Update()
+        void FixedUpdate()
         {
             if (Input.GetKeyDown(KeyCode.Alpha1))//đổi về dùng vũ khí chính
             {
                 if (Player.TypeEquipment != TypeEquipment.MainWeapon)
                 {
-                    ChangWeaponInPlayer(Player.MainWeapon.gameObject, Player.SecondaryWeapon.gameObject, Player.Knife.gameObject);
                     Player.TypeEquipment = TypeEquipment.MainWeapon;
                     Player.ChangeWeaponInPlayer();
                 }
@@ -25,7 +24,6 @@ namespace Demo
             {
                 if (Player.TypeEquipment != TypeEquipment.SecondaryWeapon)
                 {
-                    ChangWeaponInPlayer(Player.SecondaryWeapon.gameObject, Player.MainWeapon.gameObject, Player.Knife.gameObject);
                     Player.TypeEquipment = TypeEquipment.SecondaryWeapon;
                     Player.ChangeWeaponInPlayer();
                 }
@@ -34,7 +32,6 @@ namespace Demo
             {
                 if (Player.TypeEquipment != TypeEquipment.Knife)
                 {
-                    ChangWeaponInPlayer(Player.Knife.gameObject, Player.SecondaryWeapon.gameObject, Player.MainWeapon.gameObject);
                     Player.TypeEquipment = TypeEquipment.Knife;
                     Player.ChangeWeaponInPlayer();
                 }
@@ -46,15 +43,47 @@ namespace Demo
                     
                 }
             }
-        }
 
 
-        private void ChangWeaponInPlayer(GameObject p1, GameObject p2, GameObject p3)
-        {
-            p1.SetActive(true);
-            p2.SetActive(false);
-            p3.SetActive(false);
+            Player.StateMove = StateMove.Idle;
+            if (Input.GetKey(KeyCode.W))
+            {
+                Player.StateMove = StateMove.Walk;
+                if (Input.GetKey(KeyCode.LeftShift))
+                {
+                    Player.StateMove = StateMove.Run;
+                }
+                //Player.ChangeStateMoveInPlayer();
+            }
+            else if (Input.GetKey(KeyCode.S))
+            {
+                Player.StateMove = StateMove.WalkBack;
+                if (Input.GetKey(KeyCode.LeftShift))
+                {
+                    Player.StateMove = StateMove.RunBack;
+                }
+                //Player.ChangeStateMoveInPlayer();
+            }
+            else if (Input.GetKey(KeyCode.A))
+            {
+                Player.StateMove = StateMove.WalkLeft;
+                if (Input.GetKey(KeyCode.LeftShift))
+                {
+                    Player.StateMove = StateMove.RunLeft;
+                }
+                //Player.ChangeStateMoveInPlayer();
+            }
+            else if (Input.GetKey(KeyCode.D))
+            {
+                Player.StateMove = StateMove.WalkRight;
+                if (Input.GetKey(KeyCode.LeftShift))
+                {
+                    Player.StateMove = StateMove.RunRight;
+                }
+            }
+            Player.ChangeStateMoveInPlayer();
         }
+
 
         public enum StatePlayer
         {
@@ -71,6 +100,19 @@ namespace Demo
             SecondaryWeapon,
             Knife,
             Grenade,
+        }
+
+        public enum StateMove
+        {
+            Idle = 0,
+            Walk,
+            Run,
+            WalkBack,
+            RunBack,
+            WalkLeft,
+            RunLeft,
+            WalkRight,
+            RunRight,
         }
     }
 }
